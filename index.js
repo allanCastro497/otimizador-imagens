@@ -1,11 +1,9 @@
 const express = require('express')
-// const optimal = require('./optimal')
 const multer = require('multer')
 const path = require('path')
 const bodyParser = require('body-parser')
-const fs = require('fs')
-const tinify = require('tinify')
-tinify.key = '6SspjL8wdml95kmkwMdfXwcNFhk93WRL'
+const optimal = require('./otimiza/optimal')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -24,44 +22,16 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage})
-
 app.get('/', (req, res) => {
-	
 	res.render('index')
 })
+
 app.post('/upload', upload.array('img'), (req, res) => {
 	res.render('upload')
 
 })
-app.get('/otimiza', (req, res) => {
-	let lista = listarArquivos('uploads')
-	function listarArquivos(dir, arq) {
-		if (!arq) {
-			arq = []
-		}
 
-		let listaArq = fs.readdirSync(dir)
-		for(let i in listaArq) {
-			let stat = fs.statSync(dir + '/' + listaArq[i])
-			
-			if(stat.isDirectory()) {
-				listarArquivos(dir + '/' + listaArq[i], arq)
-			} else {
-				arq.push(dir + '/' + listaArq[i])
-			}
-		}
-		return arq
-		console.log(listaArq)
-	}
-	lista.forEach(img => {
-		console.log(img)
-		const source = tinify.fromFile(img);
-		source.toFile(img);
-	})
-
-	res.redirect('/')
-})
-
+app.use('/', optimal)
 
 
 app.listen(3000, () => console.log('Servidor rodando...'))
