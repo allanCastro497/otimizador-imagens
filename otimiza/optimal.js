@@ -21,7 +21,6 @@ router.get('/otimiza', (req, res) => {
 			}
 		}
 		return arq
-		console.log(listaArq)
 	}
 	let lista = listarArquivos('uploads')
 	lista.forEach(img => {

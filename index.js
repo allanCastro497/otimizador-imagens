@@ -3,6 +3,7 @@ const multer = require('multer')
 const path = require('path')
 const bodyParser = require('body-parser')
 const optimal = require('./otimiza/optimal')
+const convert = require('./jpg-to-webp/convert')
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.post('/upload', upload.array('img'), (req, res) => {
 })
 
 app.use('/', optimal)
+app.use('/', convert)
 
 
 app.listen(3000, () => console.log('Servidor rodando...'))

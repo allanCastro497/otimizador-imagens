@@ -1,0 +1,26 @@
+<%- include('../inc/head.ejs');%>
+</head>
+<body>
+	<%- include('../inc/topo.ejs');%>
+	<section>
+		<div class="container">
+			<div class="card mt-4">
+				<div class="card-header">
+					<h2>Insira a imagem para converter</h2>
+				</div>
+				<div class="card-body">
+					<form action="/converter/upload-conversion" method="post" enctype="multipart/form-data">
+						<label>Insira a imagem</label>
+						<input type="file" name="img" class="form-control-file" multiple>
+						<!-- <label>Insira o diretório das imagens:</label>
+						<input type="text" name="dir" class="form-control"> -->
+						<input type="submit" value="Fazer Upload" class="btn btn-primary mt-4">
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<%- include('../inc/js.ejs');%>
+</body>
+</html>
